@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Halaman utama {% endblock %} </title>
+</head>
+<body>
+    
+
+    {% include 'layout/component/navbar.html '%}
+
+    <main>
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+
+    {% include 'layout/component/footer.html '%}
+
+    
+</body>
+</html>

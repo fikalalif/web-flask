@@ -1,0 +1,34 @@
+<h1>Selamat datang, fuckerz {{myname}}</h1>
+<p>umur saya : {{myage}} th</p>
+<p>buah saya {{mybuah}}</p>
+
+<ul>
+    {% if mybuah %}
+    <!-- untuk for dalam html flask -->
+    {% for name in mybuah %}
+    <li>
+        {{name}}
+    </li>   
+    {% endfor %}
+    {% else %}
+    <p>tidak ada data dalam list</p>
+    {% endif %}
+
+</ul>
+
+<!-- untuk perkondisian dalam html flask -->
+{% if myage >= 17 %}
+<p>Dia dewasa</p>
+{% else %}
+{% endif %}
+
+{% for produk in myproduk %}
+<p> {{produk.name}},{{ produk.price}},
+    {% if produk.stock == True %}
+    tersedia
+    {% else %}
+    tidak tersedia
+    {% endif %}
+
+</p>
+{% endfor %}

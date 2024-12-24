@@ -1,0 +1,75 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+ini halaman homepage
+{% endblock %}
+
+{% block content %}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+  
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.js"
+  integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+  crossorigin="anonymous">
+</script>
+
+ 
+
+<a href="/form-product">tambah data</a> 
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <script>
+            swal("Good job!", "You clicked the button!", "success");
+        </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+<h1>
+    ini adalah halaman homepage
+</h1>
+
+<table id="myTable">
+    <thead>
+        <tr>
+            <td>Name Product</td>
+            <td>Image</td>
+            <td>Price</td>
+            <td>Category</td>
+            <td>Stok</td>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for product in product %}
+        <tr>
+            <td>{{product[1]}}</td>
+            <td><img src="{{product [2]}}" width="100"  alt=""></td>
+            <td>{{product[3]}}</td>
+            <td>{{product[6]}}</td>
+            <td>{{ 'Tersedia' if product[5] == True else 'Tidak Tersedia'}}</td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+{% include 'layout/component/footer.html'%}
+
+ 
+
+{% endblock %}
