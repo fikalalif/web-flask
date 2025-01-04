@@ -1,0 +1,44 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+ini halaman aboutpage
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Form Product \ Ucup Shoes
+</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+<form action="/edit-product/{{product[0]}}" method="post">
+    <input type="text" value="{{ product[1] }}" name = "name_product" placeholder="Masukan Nama Product" required>
+    <input type="text" value="{{ product[2] }}" name = "image_url" placeholder="Masukan URL image"required>
+    <input type="number" value="{{ product[3] }}" name = "price" placeholder="Masukan Harga Product"required>
+
+    <select name="category" id="" required>
+        <option value = "" > {{product[4]}} </option>
+        {% for category in category %}
+        <option value="{{ category[0]}}">{{ category[1]}}</option>
+        {% endfor %}
+    </select>
+
+    <select name="in_stock" required id="">
+        <option value="">{{product[5]}}</option>
+        <option value="1">tersedia</option>
+        <option value="0">tidak tersedia</option>
+    </select>
+
+    
+    <button type="submit"> Simpan data</button>
+</form>
+
+{% endblock %}

@@ -95,3 +95,50 @@ def add_product():
     mysql.connection.commit()
     flash('data berhasil disimpan','succes')
     return redirect('/homepage')
+
+@app.route('/form-edit-product/<int:id>')
+def form_edit_product(id):
+    cur = mysql.connection.cursor()
+    query = 'SELECT * FROM product WHERE id = %s'
+    cur.execute(query, [id])
+    product = cur.fetchone()
+    # return jsonify (product)
+    query = 'SELECT * FROM category'
+    cur.execute(query)
+    category = cur.fetchall()
+
+    return render_template('form-edit-product.html' , product = product, category = category )
+
+@app.route('/edit-product/<int:id>', methods = ['POST'])
+def edit_product(id):
+    #req data dari form
+    name_product = request.form['name_product']
+    image_url = request.form['image_url']
+    price = request.form['price']
+    category = request.form['category']
+    in_stock = request.form['in_stock']
+
+    #menyimpan data ke tabel my sql
+    cur = mysql.connection.cursor()
+    query = ''' UPDATE product SET 
+                name_product = %s,
+                image_url = %s,
+                price = %s,
+                category = %s,
+                in_stock = %s
+                WHERE id = %s
+            '''
+    cur.execute(query,(name_product,image_url,price,category,in_stock,id))
+    mysql.connection.commit()
+    flash('data berhasil diedit','succes')
+    return redirect('/homepage')
+
+@app.route('/delete-product/<int:id>')
+def delete_product(id):
+    cur = mysql.connection.cursor()
+    query = 'DELETE FROM product WHERE id = %s'
+    cur.execute(query, [id])
+    mysql.connection.commit()
+    flash ('Data Berhasil dihapus','succes')
+    return redirect('/homepage')
+

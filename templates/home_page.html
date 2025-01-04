@@ -9,13 +9,13 @@ ini halaman homepage
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
   
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
 <script
   src="https://code.jquery.com/jquery-3.7.1.slim.js"
   integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
   crossorigin="anonymous">
 </script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
  
 
@@ -36,7 +36,7 @@ ini halaman homepage
     ini adalah halaman homepage
 </h1>
 
-<table id="myTable">
+<table id="myTable" border="1px">
     <thead>
         <tr>
             <td>Name Product</td>
@@ -44,6 +44,7 @@ ini halaman homepage
             <td>Price</td>
             <td>Category</td>
             <td>Stok</td>
+            <td>Action</td>
         </tr>
     </thead>
     
@@ -55,21 +56,21 @@ ini halaman homepage
             <td>{{product[3]}}</td>
             <td>{{product[6]}}</td>
             <td>{{ 'Tersedia' if product[5] == True else 'Tidak Tersedia'}}</td>
-            
+            <td> 
+                <a href="/form-edit-product/{{ product[0] }}">Update</a>
+                <a href="/delete-product/{{ product[0] }}">Delete</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
+{% include 'layout/component/footer.html'%}
 
 <script>
     $(document).ready( function () {
     $('#myTable').DataTable();
 } );
-</script>
-
-{% include 'layout/component/footer.html'%}
-
- 
+</script> 
 
 {% endblock %}
